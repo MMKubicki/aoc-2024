@@ -10,3 +10,26 @@ Input is to be put in folder `.aoc` with subfolder of day number padded with 0 t
 ## Run
 
 Use `deno task run <day>` or `deno run --allow-read=.aoc,days main.ts <day>`
+
+## Day template
+
+```typescript
+import { join } from '@std/path';
+import { consumeFileByLine } from './util/file.ts';
+
+export default async (fileRoot: string) => {
+    // Parse
+    const inputPath = join(fileRoot, "input.txt");
+
+    await consumeFileByLine(inputPath, (line) => {
+        // TODO
+    });
+
+    // Part 1
+
+    
+    // Part 2
+
+
+}
+```

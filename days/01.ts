@@ -1,29 +1,21 @@
 import { assertEquals } from '@std/assert';
 import { join } from '@std/path';
-import { TextLineStream } from '@std/streams';
+import { consumeFileByLine } from './util/file.ts';
 
 export default async (fileRoot:string) => {
     // Parse
     const inputPath = join(fileRoot, "input.txt");
-    const inputFile = await Deno.open(inputPath, { read: true });
 
     const firstList: Array<number> = [];
     const secondList: Array<number> = []
 
-    const lineWriter = new WritableStream({
-        write(line: string) {
-            const [first, second] = line.split(/\s+/).filter((s) => s.trim().length > 0);
-            firstList.push(parseInt(first));
-            secondList.push(parseInt(second));
-        },
-    })
-    await inputFile.readable
-        .pipeThrough(new TextDecoderStream())
-        .pipeThrough(new TextLineStream())
-        .pipeTo(lineWriter);
+    await consumeFileByLine(inputPath, (line) => {
+        const [first, second] = line.split(/\s+/).filter((s) => s.trim().length > 0);
+        firstList.push(parseInt(first));
+        secondList.push(parseInt(second));
+    });
 
     assertEquals(firstList.length, secondList.length);
-
 
     // Part 1
 
