@@ -4,7 +4,7 @@
   },
   "imports": {
     "@cliffy/command": "jsr:@cliffy/command@^1.0.0-rc.7",
-    "@std/assert": "jsr:@std/assert@^1.0.8",
+    "@std/assert": "jsr:@std/assert@^1.0.9",
     "@std/path": "jsr:@std/path@^1.0.8",
     "@std/streams": "jsr:@std/streams@^1.0.8"
   }
